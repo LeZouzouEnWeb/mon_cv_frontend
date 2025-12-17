@@ -32,6 +32,9 @@ use App\Utils\Helpers;
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
     <!-- Styles -->
     <link rel="stylesheet" href="<?= Helpers::asset('css/app.css') ?>">
 </head>
@@ -87,6 +90,8 @@ use App\Utils\Helpers;
                                         <textarea id="contact-message" name="message" rows="4" required
                                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"></textarea>
                                     </div>
+                                    <!-- Cloudflare Turnstile -->
+                                    <div class="cf-turnstile" data-sitekey="<?= $_ENV['TURNSTILE_SITE_KEY'] ?? '' ?>" data-theme="light"></div>
                                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-3 -mx-4 -mb-4">
                                         <button type="submit" class="btn btn-primary w-full sm:w-auto">
                                             <i class="fas fa-paper-plane"></i>

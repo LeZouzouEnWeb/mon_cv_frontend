@@ -183,10 +183,16 @@
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
       const formData = new FormData(form);
+      const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+      if (!turnstileResponse) {
+        showConfirmationModal("error", "Erreur", "Veuillez compl\xE9ter la v\xE9rification de s\xE9curit\xE9.");
+        return;
+      }
       const data = {
         name: formData.get("name"),
         email: formData.get("email"),
-        message: formData.get("message")
+        message: formData.get("message"),
+        "cf-turnstile-response": turnstileResponse
       };
       const originalBtnText = submitBtn.innerHTML;
       submitBtn.disabled = true;
@@ -202,16 +208,25 @@
         const result = await response.json();
         if (result.success) {
           form.reset();
+          if (window.turnstile) {
+            window.turnstile.reset();
+          }
           showConfirmationModal("success", "Message envoy\xE9 !", result.message);
         } else {
           let errorMsg = result.message;
           if (result.errors) {
             errorMsg += "\n\n" + Object.values(result.errors).join("\n");
           }
+          if (window.turnstile) {
+            window.turnstile.reset();
+          }
           showConfirmationModal("error", "Erreur", errorMsg);
         }
       } catch (error) {
         console.error("Error sending message:", error);
+        if (window.turnstile) {
+          window.turnstile.reset();
+        }
         showConfirmationModal("error", "Erreur", "Une erreur est survenue lors de l'envoi du message. Veuillez v\xE9rifier votre connexion et r\xE9essayer.");
       } finally {
         submitBtn.disabled = false;

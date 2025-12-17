@@ -3,14 +3,17 @@
 namespace App\Controllers;
 
 use App\Services\EmailService;
+use App\Services\TurnstileService;
 
 class ContactController
 {
     private EmailService $emailService;
+    private TurnstileService $turnstileService;
 
     public function __construct()
     {
         $this->emailService = new EmailService();
+        $this->turnstileService = new TurnstileService();
     }
 
     /**
@@ -33,6 +36,19 @@ class ContactController
         try {
             // Récupérer les données JSON
             $input = json_decode(file_get_contents('php://input'), true);
+
+            // Vérifier le token Turnstile
+            $turnstileToken = $input['cf-turnstile-response'] ?? '';
+            $remoteIp = $_SERVER['REMOTE_ADDR'] ?? null;
+
+            if (!$this->turnstileService->verify($turnstileToken, $remoteIp)) {
+                http_response_code(400);
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Échec de la vérification de sécurité. Veuillez réessayer.'
+                ]);
+                exit;
+            }
 
             // Validation des champs
             $errors = $this->validateInput($input);

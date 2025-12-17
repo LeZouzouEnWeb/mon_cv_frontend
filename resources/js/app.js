@@ -258,10 +258,20 @@ function initContactModal() {
 
     const submitBtn = form.querySelector('button[type="submit"]');
     const formData = new FormData(form);
+
+    // Get Turnstile token
+    const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+
+    if (!turnstileResponse) {
+      showConfirmationModal('error', 'Erreur', 'Veuillez compléter la vérification de sécurité.');
+      return;
+    }
+
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
-      message: formData.get('message')
+      message: formData.get('message'),
+      'cf-turnstile-response': turnstileResponse
     };
 
     // Disable submit button
@@ -283,6 +293,10 @@ function initContactModal() {
       if (result.success) {
       // Success - show confirmation modal
         form.reset();
+        // Reset Turnstile widget
+        if (window.turnstile) {
+          window.turnstile.reset();
+        }
         showConfirmationModal('success', 'Message envoyé !', result.message);
       } else {
         // Error - show error modal
@@ -290,10 +304,18 @@ function initContactModal() {
         if (result.errors) {
           errorMsg += '\n\n' + Object.values(result.errors).join('\n');
         }
+        // Reset Turnstile on error
+        if (window.turnstile) {
+          window.turnstile.reset();
+        }
         showConfirmationModal('error', 'Erreur', errorMsg);
       }
     } catch (error) {
       console.error('Error sending message:', error);
+      // Reset Turnstile on error
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
       showConfirmationModal('error', 'Erreur', 'Une erreur est survenue lors de l\'envoi du message. Veuillez vérifier votre connexion et réessayer.');
     } finally {
       // Re-enable submit button
