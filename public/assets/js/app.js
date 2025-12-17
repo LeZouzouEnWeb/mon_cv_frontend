@@ -183,9 +183,13 @@
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
       const formData = new FormData(form);
-      const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+      let turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
       if (!turnstileResponse) {
-        showConfirmationModal("error", "Erreur", "Veuillez compl\xE9ter la v\xE9rification de s\xE9curit\xE9.");
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+      }
+      if (!turnstileResponse) {
+        showConfirmationModal("error", "Erreur", "Veuillez patienter que la v\xE9rification de s\xE9curit\xE9 se charge, puis r\xE9essayez.");
         return;
       }
       const data = {

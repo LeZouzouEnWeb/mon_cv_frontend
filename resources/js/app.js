@@ -259,11 +259,17 @@ function initContactModal() {
     const submitBtn = form.querySelector('button[type="submit"]');
     const formData = new FormData(form);
 
-    // Get Turnstile token
-    const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+    // Get Turnstile token - wait a bit if widget is still loading
+    let turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+
+    // If no response, wait 500ms and try again (widget might still be loading)
+    if (!turnstileResponse) {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+    }
 
     if (!turnstileResponse) {
-      showConfirmationModal('error', 'Erreur', 'Veuillez compléter la vérification de sécurité.');
+      showConfirmationModal('error', 'Erreur', 'Veuillez patienter que la vérification de sécurité se charge, puis réessayez.');
       return;
     }
 
