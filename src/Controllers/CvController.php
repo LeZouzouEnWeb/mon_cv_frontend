@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Services\ApiService;
 use App\Services\CacheService;
+use App\Services\ProfileService;
 
 /**
  * Contrôleur pour la page CV
@@ -12,6 +13,7 @@ class CvController
 {
     private ApiService $apiService;
     private CacheService $cacheService;
+    private ProfileService $profileService;
 
     // IDs des posts WordPress
     private const POST_IDS = [
@@ -20,6 +22,8 @@ class CvController
         'expertise' => 126,
         'polyvalence' => 121,
         'soft_skills' => 130,
+        'cv_pdf' => 74,
+        'cv_video' => 134,
     ];
 
     private const PAGE_HOME_ID = 181;
@@ -28,6 +32,7 @@ class CvController
     {
         $this->apiService = new ApiService();
         $this->cacheService = new CacheService();
+        $this->profileService = new ProfileService($this->apiService, $this->cacheService);
     }
 
     /**
@@ -38,6 +43,7 @@ class CvController
         // Récupérer les données
         $cvData = $this->getCvData();
         $homeData = $this->getHomeData();
+        $profile = $this->profileService->getProfile();
 
         // Passer les données à la vue
         require_once __DIR__ . '/../Views/pages/cv.php';

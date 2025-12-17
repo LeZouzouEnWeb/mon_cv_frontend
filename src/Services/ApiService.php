@@ -20,11 +20,12 @@ class ApiService
         $this->timeout = (int)($_ENV['API_TIMEOUT'] ?? 10);
 
         $this->client = new Client([
-            'base_uri' => $this->baseUrl,
+            'base_uri' => rtrim($this->baseUrl, '/') . '/', // S'assurer qu'il se termine par /
             'timeout' => $this->timeout,
             'headers' => [
                 'Accept' => 'application/json',
-            ]
+            ],
+            'verify' => $_ENV['APP_ENV'] === 'production', // Désactive SSL en développement
         ]);
     }
 

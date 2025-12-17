@@ -3,9 +3,11 @@
 ## 🎯 Résumé : Node.js requis ou pas ?
 
 ### ❌ Sur le serveur de production : **NON**
+
 Votre serveur PHP n'a **PAS** besoin de Node.js !
 
 ### ✅ Sur votre machine locale : **OUI** (seulement pour compiler)
+
 Node.js sert uniquement à compiler les assets **avant** de les envoyer sur le serveur.
 
 ---
@@ -29,6 +31,7 @@ dir public\assets\js\app.js
 ### Étape 2 : Transférer les fichiers sur le serveur
 
 **Via FTP/SFTP** (FileZilla, WinSCP, etc.) :
+
 ```
 Transférer :
 ✅ public/             (tout le dossier)
@@ -47,6 +50,7 @@ NE PAS transférer :
 ```
 
 **Via Git** :
+
 ```bash
 # Sur votre PC
 git add .
@@ -107,12 +111,14 @@ LOG_LEVEL=error
 ## 📋 Checklist Rapide
 
 ### Avant chaque déploiement
+
 - [ ] Compiler les assets : `npm run build` (sur PC)
 - [ ] Tester en local : `php -S localhost:8000 -t public`
 - [ ] Vérifier que `public/assets/css/app.css` existe
 - [ ] Vérifier que `public/assets/js/app.js` existe
 
 ### Premier déploiement
+
 - [ ] Transférer tous les fichiers sauf `node_modules/` et `resources/`
 - [ ] Configurer le `.env` sur le serveur
 - [ ] Lancer `composer install --no-dev` sur le serveur
@@ -120,6 +126,7 @@ LOG_LEVEL=error
 - [ ] Tester le site
 
 ### Déploiements suivants
+
 - [ ] Compiler les assets : `npm run build`
 - [ ] Transférer uniquement les fichiers modifiés
 - [ ] Vider le cache si nécessaire : `rm -rf cache/*`
@@ -129,9 +136,11 @@ LOG_LEVEL=error
 ## 🔧 Configuration Serveur
 
 ### Apache
+
 Le fichier `.htaccess` est déjà dans `public/` ✅
 
 Vérifier que le DocumentRoot pointe vers `public/` :
+
 ```apache
 DocumentRoot /var/www/cv/public
 <Directory /var/www/cv/public>
@@ -141,15 +150,16 @@ DocumentRoot /var/www/cv/public
 ```
 
 ### Nginx
+
 ```nginx
 server {
     root /var/www/cv/public;
     index index.php;
-    
+
     location / {
         try_files $uri $uri/ /index.php?$query_string;
     }
-    
+
     location ~ \.php$ {
         fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
         include fastcgi_params;
@@ -163,8 +173,10 @@ server {
 ## 🐛 Problèmes Courants
 
 ### Les styles ne s'appliquent pas
+
 **Cause** : Fichier CSS non compilé ou non transféré
 **Solution** :
+
 ```bash
 # Sur PC
 npm run build
@@ -172,15 +184,19 @@ npm run build
 ```
 
 ### Erreur "Class not found"
+
 **Cause** : Autoloader non optimisé
 **Solution** :
+
 ```bash
 composer dump-autoload --optimize
 ```
 
 ### Cache ne fonctionne pas
+
 **Cause** : Permissions incorrectes
 **Solution** :
+
 ```bash
 chmod -R 775 cache/
 chown -R www-data:www-data cache/  # ou votre utilisateur web
@@ -191,18 +207,23 @@ chown -R www-data:www-data cache/  # ou votre utilisateur web
 ## 📞 Questions Fréquentes
 
 ### Q: Dois-je installer Node.js sur mon serveur ?
+
 **R:** Non ! Node.js ne sert qu'à compiler les assets sur votre PC. Le serveur n'a besoin que de PHP.
 
 ### Q: Comment mettre à jour le CSS ?
-**R:** 
+
+**R:**
+
 1. Modifier `resources/css/app.css` sur votre PC
 2. Lancer `npm run build`
 3. Transférer le fichier compilé `public/assets/css/app.css` sur le serveur
 
 ### Q: Et si je n'ai pas Node.js du tout ?
+
 **R:** Vous pouvez utiliser Tailwind CSS via CDN (voir docs/DEPLOYMENT.md, Méthode 3)
 
 ### Q: Le cache des données API fonctionne comment ?
+
 **R:** Les données sont cachées dans `cache/` pour 1 heure par défaut (configurable dans `.env`)
 
 ---
@@ -210,10 +231,11 @@ chown -R www-data:www-data cache/  # ou votre utilisateur web
 ## 📖 Documentation Complète
 
 Pour plus de détails, voir :
+
 - [DEPLOYMENT.md](DEPLOYMENT.md) - Guide de déploiement complet
 - [GETTING_STARTED.md](GETTING_STARTED.md) - Installation et configuration
 - [RAG_KNOWLEDGE_BASE.md](RAG_KNOWLEDGE_BASE.md) - Base de connaissances
 
 ---
 
-*Dernière mise à jour : 17 décembre 2024*
+_Dernière mise à jour : 17 décembre 2024_
