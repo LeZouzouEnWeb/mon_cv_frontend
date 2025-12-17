@@ -162,10 +162,16 @@ function initLazyLoading() {
  * Initialize Application
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Tabs
-  const tabsContainer = document.querySelector('[data-tabs-container]');
+  // Initialize main Tabs
+  const tabsContainer = document.querySelector('[data-tabs-container]:not([data-tabs-container="cv-documents"])');
   if (tabsContainer) {
     new TabsManager(tabsContainer);
+  }
+
+  // Initialize CV documents tabs
+  const cvTabsContainer = document.querySelector('[data-tabs-container="cv-documents"]');
+  if (cvTabsContainer) {
+    new TabsManager(cvTabsContainer);
   }
 
   // Initialize Loader

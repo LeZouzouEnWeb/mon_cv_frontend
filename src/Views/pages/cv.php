@@ -101,14 +101,6 @@ ob_start();
                     <i class="fas fa-users"></i>
                     Soft Skills
                 </button>
-                <button data-tab="cv_pdf" class="tab whitespace-nowrap">
-                    <i class="fas fa-file-pdf"></i>
-                    CV PDF
-                </button>
-                <button data-tab="cv_video" class="tab whitespace-nowrap">
-                    <i class="fas fa-video"></i>
-                    Vidéo
-                </button>
             </nav>
         </div>
 
@@ -183,33 +175,59 @@ ob_start();
                     <p class="text-gray-500">Aucune donnée disponible.</p>
                 <?php endif; ?>
             </div>
+        </div>
+    </div>
 
-            <!-- CV PDF -->
-            <div data-panel="cv_pdf" class="hidden">
-                <?php if (!empty($cvData['cv_pdf'])): ?>
-                    <h2 class="text-2xl font-heading font-semibold mb-4">
-                        <?= Helpers::e($cvData['cv_pdf']['title']) ?>
-                    </h2>
-                    <div class="prose max-w-none">
-                        <?= $cvData['cv_pdf']['content'] ?>
-                    </div>
-                <?php else: ?>
-                    <p class="text-gray-500">Aucune donnée disponible.</p>
-                <?php endif; ?>
+    <!-- Section CV Documents - Onglets séparés avec meilleur contraste -->
+    <div class="mt-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-xl border-2 border-blue-200 overflow-hidden animate-slide-up">
+        <!-- En-tête de la section -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+            <h2 class="text-2xl font-heading font-bold text-white flex items-center gap-3">
+                <i class="fas fa-folder-open"></i>
+                Mon CV en Formats Multiples
+            </h2>
+            <p class="text-blue-100 mt-1">Découvrez mon parcours en PDF ou en vidéo</p>
+        </div>
+
+        <!-- Onglets CV -->
+        <div data-tabs-container="cv-documents" class="bg-white">
+            <!-- Tab Headers -->
+            <div class="border-b-2 border-blue-200">
+                <nav class="flex">
+                    <button data-tab="cv_pdf" class="cv-tab cv-tab-active">
+                        <i class="fas fa-file-pdf text-red-500"></i>
+                        <span>CV PDF</span>
+                    </button>
+                    <button data-tab="cv_video" class="cv-tab">
+                        <i class="fas fa-video text-blue-500"></i>
+                        <span>Présentation Vidéo</span>
+                    </button>
+                </nav>
             </div>
 
-            <!-- CV Vidéo -->
-            <div data-panel="cv_video" class="hidden">
-                <?php if (!empty($cvData['cv_video'])): ?>
-                    <h2 class="text-2xl font-heading font-semibold mb-4">
-                        <?= Helpers::e($cvData['cv_video']['title']) ?>
-                    </h2>
-                    <div class="prose max-w-none video-container">
-                        <?= $cvData['cv_video']['content'] ?>
-                    </div>
-                <?php else: ?>
-                    <p class="text-gray-500">Aucune donnée disponible.</p>
-                <?php endif; ?>
+            <!-- Tab Panels -->
+            <div class="p-6 lg:p-8">
+                <!-- CV PDF -->
+                <div data-panel="cv_pdf" class="hidden">
+                    <?php if (!empty($cvData['cv_pdf'])): ?>
+                        <div class="cv-document-content">
+                            <?= $cvData['cv_pdf']['content'] ?>
+                        </div>
+                    <?php else: ?>
+                        <p class="text-gray-500">Aucune donnée disponible.</p>
+                    <?php endif; ?>
+                </div>
+
+                <!-- CV Vidéo -->
+                <div data-panel="cv_video" class="hidden">
+                    <?php if (!empty($cvData['cv_video'])): ?>
+                        <div class="cv-document-content video-container">
+                            <?= $cvData['cv_video']['content'] ?>
+                        </div>
+                    <?php else: ?>
+                        <p class="text-gray-500">Aucune donnée disponible.</p>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

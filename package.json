@@ -7,9 +7,9 @@
     "dev": "concurrently \"npm run watch:css\" \"npm run watch:js\"",
     "build": "npm run build:css && npm run build:js",
     "watch:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css --watch",
-    "build:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css --minify",
+    "build:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css",
     "watch:js": "esbuild resources/js/app.js --bundle --outfile=public/assets/js/app.js --watch",
-    "build:js": "esbuild resources/js/app.js --bundle --minify --outfile=public/assets/js/app.js"
+    "build:js": "esbuild resources/js/app.js --bundle --outfile=public/assets/js/app.js"
   },
   "keywords": [
     "cv",

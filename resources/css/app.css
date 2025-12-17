@@ -146,6 +146,8 @@
 
   .wp-block-file__embed {
     @apply w-full rounded border border-gray-300 mb-4;
+    min-height: 600px;
+      height: 80vh;
   }
 
   .wp-block-file a:not(.wp-block-file__button) {
@@ -165,15 +167,53 @@
     @apply w-full h-auto;
   }
 
-  /* Conteneur vidéo responsive */
+        /* Conteneur vidéo responsive - taille réduite */
   .video-container {
-    @apply relative;
+    @apply relative mx-auto;
+      max-width: 640px;
   }
 
   .video-container video,
   .video-container iframe {
-    @apply w-full h-auto rounded-lg shadow-lg;
-    min-height: 400px;
+    @apply w-full h-auto rounded-lg shadow-xl border-2 border-gray-300;
+      min-height: 300px;
+      max-height: 480px;
+    }
+    
+    /* Onglets CV avec meilleur contraste */
+    .cv-tab {
+      @apply flex items-center gap-2 px-6 py-4 font-medium transition-all duration-200;
+      @apply border-b-4 border-transparent;
+      @apply text-gray-600 hover:text-blue-600 hover:bg-blue-50;
+    }
+    
+    .cv-tab-active {
+      @apply text-blue-700 bg-blue-50 border-blue-600;
+      @apply font-semibold;
+    }
+    
+    .cv-tab:hover:not(.cv-tab-active) {
+      @apply border-blue-300;
+    }
+    
+    .cv-tab i {
+      @apply text-xl;
+    }
+    
+    /* Contenu des documents CV */
+    .cv-document-content {
+      @apply bg-white rounded-lg;
+    }
+    
+    /* Amélioration du contraste pour les fichiers PDF */
+    .cv-document-content .wp-block-file {
+      @apply bg-gradient-to-br from-gray-50 to-blue-50;
+      @apply border-2 border-blue-200 shadow-md;
+    }
+    
+    .cv-document-content .wp-block-file__button {
+      @apply bg-blue-600 hover:bg-blue-700 text-white;
+      @apply shadow-lg hover:shadow-xl;
   }
 
   /* Paragraphes avec alignement */
