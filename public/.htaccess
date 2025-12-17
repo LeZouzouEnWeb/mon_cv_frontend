@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /
 
     # Rediriger toutes les requêtes vers index.php si le fichier/dossier n'existe pas
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -7,8 +8,15 @@
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
 
-# Désactiver le listing des répertoires
-Options -Indexes
+# Désactiver le listing des répertoires (compatible Ionos)
+<IfModule mod_autoindex.c>
+    IndexIgnore *
+</IfModule>
+
+# Autoriser l'accès général
+<IfModule mod_authz_core.c>
+    Require all granted
+</IfModule>
 
 # Bloquer l'accès aux fichiers cachés
 <FilesMatch "^\.">
