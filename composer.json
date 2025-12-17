@@ -1,0 +1,46 @@
+{
+    "name": "lezouzouenweb/mon_cv_frontend",
+    "description": "CV moderne avec WordPress REST API, Tailwind CSS et shadcn/ui",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric Corbisier",
+            "email": "emploi@corbisier.fr"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.8",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse src",
+        "check": [
+            "@analyse",
+            "@test"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,50 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Cache & Logs
+/cache/*
+!/cache/.gitkeep
+/logs/*
+!/logs/.gitkeep
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Compiled assets (OPTION 1: exclure les assets compilés - décommenter si vous buildez sur le serveur)
+# /public/assets/css/*.css
+# /public/assets/js/*.js
+
+# OPTION 2: Inclure les assets compilés pour déploiement sans Node.js (recommandé)
+# Les assets compilés SONT versionnés pour faciliter le déploiement sur serveur PHP uniquement
+!/public/assets/.gitkeep
+!/public/assets/css/
+!/public/assets/js/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Composer
+composer.lock
+
+# NPM
+package-lock.json
+yarn.lock
+
+# Build
+/dist/
+/build/
+
+# Test
+/coverage/
