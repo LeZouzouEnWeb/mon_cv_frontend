@@ -104,6 +104,34 @@
   .loader {
     @apply inline-block w-8 h-8 border-4 border-gray-200 border-t-primary-600 rounded-full animate-spin;
   }
+/* Modal */
+.modal {
+  @apply transition-opacity duration-300;
+}
+
+.modal.hidden {
+  @apply opacity-0 pointer-events-none;
+}
+
+.modal:not(.hidden) {
+  @apply opacity-100;
+}
+
+.modal-overlay {
+  @apply transition-opacity duration-300;
+}
+
+.modal-content {
+  @apply transition-all duration-300;
+}
+
+.modal.hidden .modal-content {
+  @apply scale-95 opacity-0;
+}
+
+.modal:not(.hidden) .modal-content {
+  @apply scale-100 opacity-100;
+}
 }
 
 @layer utilities {
@@ -337,7 +365,7 @@
       font-size: 10pt;
       line-height: 1.4;
     }
-    
+
     /* Masquer les éléments non imprimables */
     .no-print,
     header,
@@ -354,117 +382,117 @@
     #mobile-menu {
       display: none !important;
     }
-    
+
     /* Afficher les onglets principaux */
     [data-tabs-container] {
       display: block !important;
       box-shadow: none !important;
       border: 1px solid #ccc;
     }
-    
+
     /* Masquer uniquement les en-têtes d'onglets */
     [data-tabs-container]>div:has([data-tab]) {
       display: none !important;
     }
-    
+
     /* Forcer l'affichage du contenu des panels */
     [data-tabs-container]>div:has([data-panel]) {
       display: block !important;
     }
-    
+
     /* CRITIQUE: Afficher tous les panels même s'ils ont la classe hidden */
     [data-panel] {
       display: block !important;
       visibility: visible !important;
       opacity: 1 !important;
     }
-    
+
     .hidden[data-panel] {
       display: block !important;
     }
-    
+
     /* Optimiser les sections */
     section {
       page-break-inside: avoid;
       margin-bottom: 1rem;
     }
-    
+
     /* Hero section compact */
     #cv {
       @apply shadow-none border border-gray-300 mb-4;
     }
-    
+
     #cv .md\:flex {
       display: flex !important;
       align-items: center;
     }
-    
+
     /* Photo plus petite */
     #cv img {
       max-width: 80px !important;
       max-height: 100px !important;
     }
-    
+
     /* Conteneurs */
     .container,
     .max-w-7xl {
       max-width: 100% !important;
       padding: 0 !important;
     }
-    
+
     /* Onglets - masquer les en-têtes mais afficher le contenu */
     [data-tabs-container] {
       @apply shadow-none border-none;
     }
-    
+
     [data-tabs-container]>div:first-child {
       display: none !important;
     }
-    
+
     /* Titres optimisés */
     h1 {
       font-size: 14pt;
       margin-bottom: 0.2rem;
     }
-    
+
     h2 {
       font-size: 11pt;
       margin-top: 0.4rem;
       margin-bottom: 0.2rem;
     }
-    
+
     h3 {
       font-size: 10pt;
       margin-top: 0.3rem;
       margin-bottom: 0.15rem;
     }
-    
+
     h4 {
       font-size: 9pt;
       margin-top: 0.2rem;
       margin-bottom: 0.1rem;
     }
-    
+
     /* Listes compactes */
     ul,
     ol {
       margin: 0.2rem 0;
       padding-left: 1rem;
     }
-    
+
     li {
       margin-bottom: 0.1rem;
       font-size: 8pt;
       line-height: 1.3;
     }
-    
+
     /* Paragraphes compacts */
     p {
       margin-bottom: 0.2rem;
       font-size: 8pt;
       line-height: 1.3;
     }
-    
+
     /* Séparateurs visibles mais discrets */
     hr,
     .wp-block-separator {
@@ -472,19 +500,19 @@
       margin: 0.5rem 0 !important;
       background: none !important;
     }
-    
+
     /* Liens en noir */
     a {
       color: #000 !important;
       text-decoration: none;
     }
-    
+
     a[href^="http"]:after {
       content: " (" attr(href) ")";
       font-size: 8pt;
       color: #666;
     }
-    
+
     /* Éviter les coupures de page */
     h2,
     h3,
@@ -493,14 +521,14 @@
     h6 {
       page-break-after: avoid;
     }
-    
+
     ul,
     ol,
     pre,
     blockquote {
       page-break-inside: avoid;
     }
-    
+
     /* Backgrounds et bordures simplifiés */
     .bg-gradient-to-br,
     .bg-gradient-to-r,
@@ -509,7 +537,7 @@
     .bg-gray-50 {
       background: white !important;
     }
-    
+
     .border-primary-600,
     .border-primary-200,
     .border-blue-200,

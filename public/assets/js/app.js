@@ -114,6 +114,51 @@
       document.body.appendChild(script);
     }
   }
+  function initContactModal() {
+    const modal = document.getElementById("contact-modal");
+    const openBtns = [
+      document.getElementById("contact-modal-btn"),
+      document.getElementById("contact-modal-btn-mobile")
+    ];
+    const closeBtn = document.getElementById("contact-modal-close");
+    const overlay = modal?.querySelector(".modal-overlay");
+    const form = document.getElementById("contact-form");
+    if (!modal)
+      return;
+    openBtns.forEach((btn) => {
+      btn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      });
+    });
+    const closeModal = () => {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+    };
+    closeBtn?.addEventListener("click", closeModal);
+    overlay?.addEventListener("click", closeModal);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+        closeModal();
+      }
+    });
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        message: formData.get("message")
+      };
+      console.log("Form submitted:", data);
+      alert(`Merci ${data.name} ! Votre message a \xE9t\xE9 envoy\xE9.
+
+Note: Cette fonctionnalit\xE9 sera impl\xE9ment\xE9e prochainement.`);
+      form.reset();
+      closeModal();
+    });
+  }
   document.addEventListener("DOMContentLoaded", () => {
     const tabsContainer = document.querySelector('[data-tabs-container]:not([data-tabs-container="cv-documents"])');
     if (tabsContainer) {
@@ -130,6 +175,7 @@
     initPrintButton();
     initExternalLinks();
     initLazyLoading();
+    initContactModal();
     document.body.classList.add("animate-fade-in");
   });
 })();

@@ -159,6 +159,68 @@ function initLazyLoading() {
 }
 
 /**
+ * Contact Modal Management
+ */
+function initContactModal() {
+  const modal = document.getElementById('contact-modal');
+  const openBtns = [
+    document.getElementById('contact-modal-btn'),
+    document.getElementById('contact-modal-btn-mobile')
+  ];
+  const closeBtn = document.getElementById('contact-modal-close');
+  const overlay = modal?.querySelector('.modal-overlay');
+  const form = document.getElementById('contact-form');
+
+  if (!modal) return;
+
+  // Open modal
+  openBtns.forEach(btn => {
+    btn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Close modal
+  const closeModal = () => {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+
+  closeBtn?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', closeModal);
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+
+  // Handle form submission
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    };
+
+    // TODO: Implement actual email sending logic
+    console.log('Form submitted:', data);
+
+    // Show success message (temporary)
+    alert(`Merci ${data.name} ! Votre message a été envoyé.\n\nNote: Cette fonctionnalité sera implémentée prochainement.`);
+
+    form.reset();
+    closeModal();
+  });
+}
+
+/**
  * Initialize Application
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -184,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPrintButton();
   initExternalLinks();
   initLazyLoading();
+  initContactModal();
 
   // Add fade-in animation to page
   document.body.classList.add('animate-fade-in');
