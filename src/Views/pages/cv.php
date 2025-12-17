@@ -18,13 +18,15 @@ ob_start();
     <section id="cv" class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 animate-slide-up">
         <div class="md:flex">
             <!-- Photo -->
-            <div class="md:w-1/3 lg:w-1/4 bg-gradient-to-br from-gray-100 to-gray-200">
-                <img src="<?= Helpers::asset('images/photo/photo-cv.jpg') ?>" alt="Eric Corbisier"
-                    class="w-full h-full object-cover" loading="eager">
+            <div class="flex items-center justify-center p-6 bg-gradient-to-br from-gray-100 to-gray-200">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-lg overflow-hidden shadow-xl ring-4 ring-white relative">
+                    <img src="https://api-cv.corbisier.fr/wp-content/uploads/2025/12/photo_cv-e1766005700668.jpg"
+                        alt="Eric Corbisier" class="w-full h-full object-cover object-center" loading="eager">
+                </div>
             </div>
 
             <!-- Informations -->
-            <div class="md:w-2/3 lg:w-3/4 p-6 lg:p-8">
+            <div class="flex-1 p-6 lg:p-8">
                 <h1 class="font-heading font-bold text-4xl mb-2">Eric Corbisier</h1>
                 <p class="text-xl text-primary-600 mb-4">Développeur Web Full Stack</p>
 
@@ -77,9 +79,19 @@ ob_start();
     </section>
 
     <!-- Tabs -->
-    <div data-tabs-container class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div data-tabs-container
+        class="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl border-2 border-primary-200 overflow-hidden animate-slide-up">
+        <!-- En-tête de section -->
+        <div class="bg-gradient-to-r from-primary-600 to-primary-700 px-6 py-4">
+            <h2 class="text-2xl font-heading font-bold text-white flex items-center gap-3">
+                <i class="fas fa-chart-line"></i>
+                Mon Parcours Professionnel
+            </h2>
+            <p class="text-primary-100 mt-1 text-sm">Découvrez mes compétences et mon expérience</p>
+        </div>
+
         <!-- Tab Headers -->
-        <div class="border-b border-gray-200 overflow-x-auto">
+        <div class="border-b-2 border-primary-200 overflow-x-auto bg-gradient-to-b from-gray-50 to-white">
             <nav class="flex -mb-px">
                 <button data-tab="experience" class="tab tab-active whitespace-nowrap">
                     <i class="fas fa-briefcase"></i>
@@ -105,14 +117,18 @@ ob_start();
         </div>
 
         <!-- Tab Panels -->
-        <div class="p-6 lg:p-8">
+        <div class="p-6 lg:p-8 bg-white">
             <!-- Experience -->
-            <div data-panel="experience" class="hidden">
+            <div data-panel="experience" class="hidden tab-panel">
                 <?php if (!empty($cvData['experience'])): ?>
-                    <h2 class="text-2xl font-heading font-semibold mb-4">
-                        <?= Helpers::e($cvData['experience']['title']) ?>
-                    </h2>
-                    <div class="prose max-w-none">
+                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                        <i class="fas fa-briefcase text-2xl text-primary-600"></i>
+                        <h2 class="text-3xl font-heading font-bold text-gray-800">
+                            <?= Helpers::e($cvData['experience']['title']) ?>
+                        </h2>
+                    </div>
+                    <div
+                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
                         <?= $cvData['experience']['content'] ?>
                     </div>
                 <?php else: ?>
@@ -121,12 +137,16 @@ ob_start();
             </div>
 
             <!-- Formations -->
-            <div data-panel="formations" class="hidden">
+            <div data-panel="formations" class="hidden tab-panel">
                 <?php if (!empty($cvData['formations'])): ?>
-                    <h2 class="text-2xl font-heading font-semibold mb-4">
-                        <?= Helpers::e($cvData['formations']['title']) ?>
-                    </h2>
-                    <div class="prose max-w-none">
+                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                        <i class="fas fa-graduation-cap text-2xl text-primary-600"></i>
+                        <h2 class="text-3xl font-heading font-bold text-gray-800">
+                            <?= Helpers::e($cvData['formations']['title']) ?>
+                        </h2>
+                    </div>
+                    <div
+                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
                         <?= $cvData['formations']['content'] ?>
                     </div>
                 <?php else: ?>
@@ -135,12 +155,16 @@ ob_start();
             </div>
 
             <!-- Expertise -->
-            <div data-panel="expertise" class="hidden">
+            <div data-panel="expertise" class="hidden tab-panel">
                 <?php if (!empty($cvData['expertise'])): ?>
-                    <h2 class="text-2xl font-heading font-semibold mb-4">
-                        <?= Helpers::e($cvData['expertise']['title']) ?>
-                    </h2>
-                    <div class="prose max-w-none">
+                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                        <i class="fas fa-code text-2xl text-primary-600"></i>
+                        <h2 class="text-3xl font-heading font-bold text-gray-800">
+                            <?= Helpers::e($cvData['expertise']['title']) ?>
+                        </h2>
+                    </div>
+                    <div
+                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
                         <?= $cvData['expertise']['content'] ?>
                     </div>
                 <?php else: ?>
@@ -149,12 +173,16 @@ ob_start();
             </div>
 
             <!-- Polyvalence -->
-            <div data-panel="polyvalence" class="hidden">
+            <div data-panel="polyvalence" class="hidden tab-panel">
                 <?php if (!empty($cvData['polyvalence'])): ?>
-                    <h2 class="text-2xl font-heading font-semibold mb-4">
-                        <?= Helpers::e($cvData['polyvalence']['title']) ?>
-                    </h2>
-                    <div class="prose max-w-none">
+                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                        <i class="fas fa-puzzle-piece text-2xl text-primary-600"></i>
+                        <h2 class="text-3xl font-heading font-bold text-gray-800">
+                            <?= Helpers::e($cvData['polyvalence']['title']) ?>
+                        </h2>
+                    </div>
+                    <div
+                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
                         <?= $cvData['polyvalence']['content'] ?>
                     </div>
                 <?php else: ?>
@@ -163,12 +191,16 @@ ob_start();
             </div>
 
             <!-- Soft Skills -->
-            <div data-panel="soft_skills" class="hidden">
+            <div data-panel="soft_skills" class="hidden tab-panel">
                 <?php if (!empty($cvData['soft_skills'])): ?>
-                    <h2 class="text-2xl font-heading font-semibold mb-4">
-                        <?= Helpers::e($cvData['soft_skills']['title']) ?>
-                    </h2>
-                    <div class="prose max-w-none">
+                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                        <i class="fas fa-users text-2xl text-primary-600"></i>
+                        <h2 class="text-3xl font-heading font-bold text-gray-800">
+                            <?= Helpers::e($cvData['soft_skills']['title']) ?>
+                        </h2>
+                    </div>
+                    <div
+                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
                         <?= $cvData['soft_skills']['content'] ?>
                     </div>
                 <?php else: ?>
@@ -179,7 +211,8 @@ ob_start();
     </div>
 
     <!-- Section CV Documents - Onglets séparés avec meilleur contraste -->
-    <div class="mt-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-xl border-2 border-blue-200 overflow-hidden animate-slide-up">
+    <div
+        class="mt-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-xl border-2 border-blue-200 overflow-hidden animate-slide-up">
         <!-- En-tête de la section -->
         <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
             <h2 class="text-2xl font-heading font-bold text-white flex items-center gap-3">

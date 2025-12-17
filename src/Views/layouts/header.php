@@ -1,4 +1,5 @@
 <?php
+
 use App\Utils\Helpers;
 ?>
 <header class="bg-white shadow-sm sticky top-0 z-40 no-print">
@@ -6,9 +7,8 @@ use App\Utils\Helpers;
         <div class="flex items-center justify-between h-16">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="/" class="flex items-center space-x-3">
-                    <img src="<?= Helpers::asset('images/logo/logo.png') ?>" alt="Logo" class="h-10 w-10">
-                    <span class="font-heading font-bold text-xl text-gray-900">Eric Corbisier</span>
+                <a href="/" class="flex items-center">
+                    <img src="https://api-cv.corbisier.fr/wp-content/uploads/2025/12/logo_corbidev_large-e1766005728496.png" alt="CorbiDev Logo" class="h-20 w-auto">
                 </a>
             </div>
 

@@ -52,13 +52,39 @@
     @apply transition-shadow duration-300 hover:shadow-xl;
   }
 
-  /* Onglets */
+                                                                                                                                                                                                                                                                /* Onglets principaux - style harmonisé avec les onglets CV */
   .tab {
-    @apply px-6 py-3 font-medium text-gray-600 border-b-2 border-transparent hover:text-primary-600 hover:border-primary-200 transition-colors cursor-pointer;
+    @apply flex items-center gap-2 px-6 py-4 font-medium transition-all duration-300;
+      @apply border-b-4 border-transparent;
+      @apply text-gray-600 hover:text-primary-600 hover:bg-primary-50;
+      @apply cursor-pointer rounded-t-lg;
+      @apply transform hover:scale-105;
   }
 
   .tab-active {
-    @apply text-primary-600 border-primary-600;
+    @apply text-primary-700 bg-white border-primary-600;
+      @apply font-bold shadow-md;
+    }
+    
+    .tab:hover:not(.tab-active) {
+      @apply border-primary-300 bg-gradient-to-b from-primary-50 to-transparent;
+    }
+    
+    .tab i {
+      @apply text-xl transition-transform;
+    }
+    
+    .tab-active i {
+      @apply transform scale-110;
+    }
+    
+    /* Panels des onglets avec animation */
+    .tab-panel {
+      @apply transition-all duration-300;
+    }
+    
+    .tab-panel:not(.hidden) {
+      @apply animate-fade-in;
   }
 
   /* Badge */
@@ -120,23 +146,97 @@
 /* WordPress Block Editor styles */
 @layer components {
 
-  /* Séparateurs */
+  /* Séparateurs - style amélioré avec gradient */
   .wp-block-separator {
-    @apply border-t-2 border-gray-200 my-6;
+    @apply border-0 h-px my-8;
+      background: linear-gradient(to right, transparent, rgb(59, 130, 246), transparent);
   }
 
   .wp-block-separator.has-alpha-channel-opacity {
-    @apply opacity-50;
+    @apply opacity-60;
   }
 
-  /* Titres */
+                                /* Titres WordPress dans les panels */
   .wp-block-heading {
-    @apply font-heading font-semibold text-gray-900 mt-6 mb-4;
+    @apply font-heading font-bold text-gray-900 mt-8 mb-4;
   }
 
-  /* Listes */
+                                /* Listes - style amélioré avec icônes */
   .wp-block-list {
-    @apply list-disc list-inside space-y-2 text-gray-700 ml-4;
+    @apply space-y-3 text-gray-700 ml-0 list-none;
+    }
+    
+    .wp-block-list li {
+      @apply pl-6 relative;
+    }
+    
+    .wp-block-list li::before {
+      content: "✓";
+      @apply absolute left-0 text-primary-600 font-bold;
+    }
+    
+    /* Amélioration de la prose dans les panels */
+    .tab-panel .prose {
+      @apply text-gray-700 leading-relaxed;
+    }
+    
+    .tab-panel .prose p {
+      @apply mb-4 text-base;
+    }
+    
+    .tab-panel .prose p strong {
+      @apply text-gray-900 font-bold text-base;
+    }
+    
+    .tab-panel .prose p em {
+      @apply text-gray-600 italic;
+    }
+    
+    .tab-panel .prose h2 {
+      @apply flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200;
+      @apply text-xl font-heading font-bold text-gray-800 mt-8;
+    }
+    
+    .tab-panel .prose h2::before {
+      content: "▸";
+      @apply text-2xl text-primary-600 font-bold;
+    }
+    
+    .tab-panel .prose h3 {
+      @apply text-lg font-heading font-bold text-primary-600 mt-8 mb-2;
+      @apply bg-gradient-to-r from-primary-50 to-transparent px-4 py-3 rounded-lg;
+      @apply border-l-4 border-primary-600;
+    }
+    
+    .tab-panel .prose h4 {
+      @apply text-sm font-heading font-semibold text-gray-700 mt-3 mb-3;
+      @apply pl-4 border-l-2 border-gray-300;
+    }
+    
+    .tab-panel .prose p {
+      @apply mb-4 text-sm leading-relaxed;
+    }
+    
+    .tab-panel .prose p:has(+ .wp-block-separator) {
+      @apply mb-6;
+    }
+    
+    .tab-panel .prose ul {
+      @apply space-y-2 ml-0 list-none;
+    }
+    
+    .tab-panel .prose ul li {
+      @apply pl-6 relative text-gray-700 leading-relaxed text-sm;
+    }
+    
+    .tab-panel .prose ul li::before {
+      content: "▸";
+      @apply absolute left-0 text-primary-500 font-bold text-lg;
+    }
+    
+    .tab-panel .prose hr {
+      @apply border-0 h-px my-6;
+      background: linear-gradient(to right, transparent 10%, rgb(59, 130, 246) 50%, transparent 90%);
   }
 
   /* Fichiers (PDF) */
@@ -147,7 +247,7 @@
   .wp-block-file__embed {
     @apply w-full rounded border border-gray-300 mb-4;
     min-height: 600px;
-      height: 80vh;
+    height: 80vh;
   }
 
   .wp-block-file a:not(.wp-block-file__button) {
@@ -158,6 +258,13 @@
     @apply btn btn-primary mt-4;
   }
 
+/* iframes (PDF embarqué) - taille limitée */
+.cv-document-content iframe.object {
+  @apply mx-auto rounded-lg border-2 border-gray-300 shadow-lg;
+  max-width: 400px;
+  width: 100%;
+  min-height: 500px;
+}
   /* Vidéos */
   .wp-block-video {
     @apply my-6 rounded-lg overflow-hidden shadow-lg;
@@ -179,38 +286,38 @@
       min-height: 300px;
       max-height: 480px;
     }
-    
+
     /* Onglets CV avec meilleur contraste */
     .cv-tab {
       @apply flex items-center gap-2 px-6 py-4 font-medium transition-all duration-200;
       @apply border-b-4 border-transparent;
       @apply text-gray-600 hover:text-blue-600 hover:bg-blue-50;
     }
-    
+
     .cv-tab-active {
       @apply text-blue-700 bg-blue-50 border-blue-600;
       @apply font-semibold;
     }
-    
+
     .cv-tab:hover:not(.cv-tab-active) {
       @apply border-blue-300;
     }
-    
+
     .cv-tab i {
       @apply text-xl;
     }
-    
+
     /* Contenu des documents CV */
     .cv-document-content {
       @apply bg-white rounded-lg;
     }
-    
+
     /* Amélioration du contraste pour les fichiers PDF */
     .cv-document-content .wp-block-file {
       @apply bg-gradient-to-br from-gray-50 to-blue-50;
       @apply border-2 border-blue-200 shadow-md;
     }
-    
+
     .cv-document-content .wp-block-file__button {
       @apply bg-blue-600 hover:bg-blue-700 text-white;
       @apply shadow-lg hover:shadow-xl;
