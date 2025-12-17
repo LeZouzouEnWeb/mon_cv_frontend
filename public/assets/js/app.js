@@ -114,6 +114,42 @@
       document.body.appendChild(script);
     }
   }
+  function showConfirmationModal(type, title, message) {
+    const confirmModal = document.getElementById("confirmation-modal");
+    const contactModal = document.getElementById("contact-modal");
+    const iconDiv = document.getElementById("confirmation-icon");
+    const titleDiv = document.getElementById("confirmation-title");
+    const messageDiv = document.getElementById("confirmation-message");
+    const closeBtn = document.getElementById("confirmation-modal-close");
+    const overlay = confirmModal?.querySelector(".modal-overlay");
+    if (!confirmModal)
+      return;
+    if (type === "success") {
+      iconDiv.className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10";
+      iconDiv.innerHTML = '<i class="fas fa-check text-green-600 text-xl"></i>';
+    } else {
+      iconDiv.className = "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10";
+      iconDiv.innerHTML = '<i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>';
+    }
+    titleDiv.textContent = title;
+    messageDiv.textContent = message;
+    contactModal?.classList.add("hidden");
+    confirmModal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    const closeConfirmModal = () => {
+      confirmModal.classList.add("hidden");
+      document.body.style.overflow = "";
+    };
+    closeBtn?.addEventListener("click", closeConfirmModal, { once: true });
+    overlay?.addEventListener("click", closeConfirmModal, { once: true });
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && !confirmModal.classList.contains("hidden")) {
+        closeConfirmModal();
+        document.removeEventListener("keydown", handleEscape);
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+  }
   function initContactModal() {
     const modal = document.getElementById("contact-modal");
     const openBtns = [
@@ -145,18 +181,42 @@
     });
     form?.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
       const formData = new FormData(form);
       const data = {
         name: formData.get("name"),
         email: formData.get("email"),
         message: formData.get("message")
       };
-      console.log("Form submitted:", data);
-      alert(`Merci ${data.name} ! Votre message a \xE9t\xE9 envoy\xE9.
-
-Note: Cette fonctionnalit\xE9 sera impl\xE9ment\xE9e prochainement.`);
-      form.reset();
-      closeModal();
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+      try {
+        const response = await fetch("/contact-send.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.success) {
+          form.reset();
+          showConfirmationModal("success", "Message envoy\xE9 !", result.message);
+        } else {
+          let errorMsg = result.message;
+          if (result.errors) {
+            errorMsg += "\n\n" + Object.values(result.errors).join("\n");
+          }
+          showConfirmationModal("error", "Erreur", errorMsg);
+        }
+      } catch (error) {
+        console.error("Error sending message:", error);
+        showConfirmationModal("error", "Erreur", "Une erreur est survenue lors de l'envoi du message. Veuillez v\xE9rifier votre connexion et r\xE9essayer.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      }
     });
   }
   document.addEventListener("DOMContentLoaded", () => {

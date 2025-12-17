@@ -161,6 +161,60 @@ function initLazyLoading() {
 /**
  * Contact Modal Management
  */
+/**
+ * Show confirmation modal
+ */
+function showConfirmationModal(type, title, message) {
+  const confirmModal = document.getElementById('confirmation-modal');
+  const contactModal = document.getElementById('contact-modal');
+  const iconDiv = document.getElementById('confirmation-icon');
+  const titleDiv = document.getElementById('confirmation-title');
+  const messageDiv = document.getElementById('confirmation-message');
+  const closeBtn = document.getElementById('confirmation-modal-close');
+  const overlay = confirmModal?.querySelector('.modal-overlay');
+
+  if (!confirmModal) return;
+
+  // Configure icon and colors based on type
+  if (type === 'success') {
+    iconDiv.className = 'mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10';
+    iconDiv.innerHTML = '<i class="fas fa-check text-green-600 text-xl"></i>';
+  } else {
+    iconDiv.className = 'mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10';
+    iconDiv.innerHTML = '<i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>';
+  }
+
+  // Set content
+  titleDiv.textContent = title;
+  messageDiv.textContent = message;
+
+  // Close contact modal and open confirmation modal
+  contactModal?.classList.add('hidden');
+  confirmModal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  // Close confirmation modal
+  const closeConfirmModal = () => {
+    confirmModal.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+
+  closeBtn?.addEventListener('click', closeConfirmModal, { once: true });
+  overlay?.addEventListener('click', closeConfirmModal, { once: true });
+
+  // Close on Escape key
+  const handleEscape = (e) => {
+    if (e.key === 'Escape' && !confirmModal.classList.contains('hidden')) {
+      closeConfirmModal();
+      document.removeEventListener('keydown', handleEscape);
+    }
+  };
+  document.addEventListener('keydown', handleEscape);
+}
+
+/**
+ * Initialize Contact Modal
+ */
 function initContactModal() {
   const modal = document.getElementById('contact-modal');
   const openBtns = [
@@ -202,6 +256,7 @@ function initContactModal() {
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const submitBtn = form.querySelector('button[type="submit"]');
     const formData = new FormData(form);
     const data = {
       name: formData.get('name'),
@@ -209,14 +264,42 @@ function initContactModal() {
       message: formData.get('message')
     };
 
-    // TODO: Implement actual email sending logic
-    console.log('Form submitted:', data);
+    // Disable submit button
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
 
-    // Show success message (temporary)
-    alert(`Merci ${data.name} ! Votre message a été envoyé.\n\nNote: Cette fonctionnalité sera implémentée prochainement.`);
+    try {
+      const response = await fetch('/contact-send.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
 
-    form.reset();
-    closeModal();
+      const result = await response.json();
+
+      if (result.success) {
+      // Success - show confirmation modal
+        form.reset();
+        showConfirmationModal('success', 'Message envoyé !', result.message);
+      } else {
+        // Error - show error modal
+        let errorMsg = result.message;
+        if (result.errors) {
+          errorMsg += '\n\n' + Object.values(result.errors).join('\n');
+        }
+        showConfirmationModal('error', 'Erreur', errorMsg);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      showConfirmationModal('error', 'Erreur', 'Une erreur est survenue lors de l\'envoi du message. Veuillez vérifier votre connexion et réessayer.');
+    } finally {
+      // Re-enable submit button
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
+    }
   });
 }
 
