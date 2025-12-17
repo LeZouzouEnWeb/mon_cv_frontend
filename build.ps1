@@ -1,49 +1,49 @@
 # Script de build pour la production (Windows)
 
-Write-Host "ğŸš€ Build pour la production..." -ForegroundColor Green
+Write-Host "?? Build pour la production..." -ForegroundColor Green
 
-# 1. VÃ©rifier que Node.js est installÃ©
+# 1. Vérifier que Node.js est installé
 if (!(Get-Command npm -ErrorAction SilentlyContinue)) {
-    Write-Host "âŒ npm n'est pas installÃ©. Installez Node.js d'abord." -ForegroundColor Red
+    Write-Host "? npm n'est pas installé. Installez Node.js d'abord." -ForegroundColor Red
     exit 1
 }
 
-# 2. Installer les dÃ©pendances si nÃ©cessaire
+# 2. Installer les dépendances si nécessaire
 if (!(Test-Path "node_modules")) {
-    Write-Host "ğŸ“¦ Installation des dÃ©pendances Node.js..." -ForegroundColor Yellow
+    Write-Host "?? Installation des dépendances Node.js..." -ForegroundColor Yellow
     npm install
 }
 
 # 3. Build des assets
-Write-Host "ğŸ¨ Compilation des assets CSS et JS..." -ForegroundColor Yellow
+Write-Host "?? Compilation des assets CSS et JS..." -ForegroundColor Yellow
 npm run build
 
-# 4. VÃ©rifier que les fichiers ont Ã©tÃ© crÃ©Ã©s
+# 4. Vérifier que les fichiers ont été créés
 if ((Test-Path "public/assets/css/app.css") -and (Test-Path "public/assets/js/app.js")) {
-    Write-Host "âœ… Assets compilÃ©s avec succÃ¨s !" -ForegroundColor Green
+    Write-Host "? Assets compilés avec succès !" -ForegroundColor Green
     Write-Host ""
-    Write-Host "Fichiers gÃ©nÃ©rÃ©s :"
+    Write-Host "Fichiers générés :"
     Get-Item public/assets/css/app.css | Format-Table Name, Length, LastWriteTime
     Get-Item public/assets/js/app.js | Format-Table Name, Length, LastWriteTime
 } else {
-    Write-Host "âŒ Erreur lors de la compilation des assets" -ForegroundColor Red
+    Write-Host "? Erreur lors de la compilation des assets" -ForegroundColor Red
     exit 1
 }
 
 # 5. Optimiser l'autoload Composer si disponible
 if (Get-Command composer -ErrorAction SilentlyContinue) {
     Write-Host ""
-    Write-Host "ğŸ“¦ Optimisation de l'autoloader Composer..." -ForegroundColor Yellow
+    Write-Host "?? Optimisation de l'autoloader Composer..." -ForegroundColor Yellow
     composer dump-autoload --optimize
 }
 
 Write-Host ""
-Write-Host "âœ… Build terminÃ© ! Vous pouvez maintenant dÃ©ployer les fichiers sur votre serveur." -ForegroundColor Green
+Write-Host "? Build terminé ! Vous pouvez maintenant déployer les fichiers sur votre serveur." -ForegroundColor Green
 Write-Host ""
-Write-Host "Fichiers Ã  transfÃ©rer :"
+Write-Host "Fichiers à transférer :"
 Write-Host "  - public/"
 Write-Host "  - src/"
 Write-Host "  - cache/ (vide)"
 Write-Host "  - logs/ (vide)"
 Write-Host "  - composer.json"
-Write-Host "  - .env (Ã  configurer sur le serveur)"
+Write-Host "  - .env (à configurer sur le serveur)"
