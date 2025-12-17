@@ -19,8 +19,8 @@ ob_start();
         <div class="md:flex">
             <!-- Photo -->
             <div class="flex items-center justify-center p-6 bg-gradient-to-br from-gray-100 to-gray-200">
-                <div class="w-32 h-32 md:w-40 md:h-40 rounded-lg overflow-hidden shadow-xl ring-4 ring-white relative">
-                    <img src="https://api-cv.corbisier.fr/wp-content/uploads/2025/12/photo_cv-e1766005700668.jpg"
+                <div class="w-32 h-40 md:w-40 md:h-48 rounded-lg overflow-hidden shadow-xl ring-4 ring-white relative">
+                    <img src="https://api-cv.corbisier.fr/wp-content/uploads/2025/12/photo_identite_tr-e1766007892344.png"
                         alt="Eric Corbisier" class="w-full h-full object-cover object-center" loading="eager">
                 </div>
             </div>
@@ -31,9 +31,9 @@ ob_start();
                 <p class="text-xl text-primary-600 mb-4">Développeur Web Full Stack</p>
 
                 <?php if (!empty($homeData['excerpt'])): ?>
-                    <div class="text-gray-600 mb-6">
-                        <?= $homeData['excerpt'] ?>
-                    </div>
+                <div class="text-gray-600 mb-6">
+                    <?= $homeData['excerpt'] ?>
+                </div>
                 <?php endif; ?>
 
                 <!-- Contact & Liens -->
@@ -49,7 +49,7 @@ ob_start();
                             </li>
                             <li class="flex items-center gap-2 text-gray-700">
                                 <i class="fas fa-phone text-primary-600"></i>
-                                <span>+33 X XX XX XX XX</span>
+                                <span>+33 6 50 46 91 20</span>
                             </li>
                         </ul>
                     </div>
@@ -66,9 +66,16 @@ ob_start();
                             </li>
                             <li class="flex items-center gap-2">
                                 <i class="fas fa-globe text-primary-600"></i>
-                                <a href="https://api-cv.corbisier.fr" target="_blank" rel="noopener noreferrer"
+                                <a href="https://corbisier.fr" target="_blank" rel="noopener noreferrer"
                                     class="text-gray-700 hover:text-primary-600">
-                                    Site Web
+                                    corbisier.fr
+                                </a>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-globe text-primary-600"></i>
+                                <a href="https://lescorbycats.fr" target="_blank" rel="noopener noreferrer"
+                                    class="text-gray-700 hover:text-primary-600">
+                                    lescorbycats.fr
                                 </a>
                             </li>
                         </ul>
@@ -121,90 +128,90 @@ ob_start();
             <!-- Experience -->
             <div data-panel="experience" class="hidden tab-panel">
                 <?php if (!empty($cvData['experience'])): ?>
-                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
-                        <i class="fas fa-briefcase text-2xl text-primary-600"></i>
-                        <h2 class="text-3xl font-heading font-bold text-gray-800">
-                            <?= Helpers::e($cvData['experience']['title']) ?>
-                        </h2>
-                    </div>
-                    <div
-                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
-                        <?= $cvData['experience']['content'] ?>
-                    </div>
+                <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                    <i class="fas fa-briefcase text-2xl text-primary-600"></i>
+                    <h2 class="text-3xl font-heading font-bold text-gray-800">
+                        <?= Helpers::e($cvData['experience']['title']) ?>
+                    </h2>
+                </div>
+                <div
+                    class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
+                    <?= $cvData['experience']['content'] ?>
+                </div>
                 <?php else: ?>
-                    <p class="text-gray-500">Aucune donnée disponible.</p>
+                <p class="text-gray-500">Aucune donnée disponible.</p>
                 <?php endif; ?>
             </div>
 
             <!-- Formations -->
             <div data-panel="formations" class="hidden tab-panel">
                 <?php if (!empty($cvData['formations'])): ?>
-                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
-                        <i class="fas fa-graduation-cap text-2xl text-primary-600"></i>
-                        <h2 class="text-3xl font-heading font-bold text-gray-800">
-                            <?= Helpers::e($cvData['formations']['title']) ?>
-                        </h2>
-                    </div>
-                    <div
-                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
-                        <?= $cvData['formations']['content'] ?>
-                    </div>
+                <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                    <i class="fas fa-graduation-cap text-2xl text-primary-600"></i>
+                    <h2 class="text-3xl font-heading font-bold text-gray-800">
+                        <?= Helpers::e($cvData['formations']['title']) ?>
+                    </h2>
+                </div>
+                <div
+                    class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
+                    <?= $cvData['formations']['content'] ?>
+                </div>
                 <?php else: ?>
-                    <p class="text-gray-500">Aucune donnée disponible.</p>
+                <p class="text-gray-500">Aucune donnée disponible.</p>
                 <?php endif; ?>
             </div>
 
             <!-- Expertise -->
             <div data-panel="expertise" class="hidden tab-panel">
                 <?php if (!empty($cvData['expertise'])): ?>
-                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
-                        <i class="fas fa-code text-2xl text-primary-600"></i>
-                        <h2 class="text-3xl font-heading font-bold text-gray-800">
-                            <?= Helpers::e($cvData['expertise']['title']) ?>
-                        </h2>
-                    </div>
-                    <div
-                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
-                        <?= $cvData['expertise']['content'] ?>
-                    </div>
+                <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                    <i class="fas fa-code text-2xl text-primary-600"></i>
+                    <h2 class="text-3xl font-heading font-bold text-gray-800">
+                        <?= Helpers::e($cvData['expertise']['title']) ?>
+                    </h2>
+                </div>
+                <div
+                    class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
+                    <?= $cvData['expertise']['content'] ?>
+                </div>
                 <?php else: ?>
-                    <p class="text-gray-500">Aucune donnée disponible.</p>
+                <p class="text-gray-500">Aucune donnée disponible.</p>
                 <?php endif; ?>
             </div>
 
             <!-- Polyvalence -->
             <div data-panel="polyvalence" class="hidden tab-panel">
                 <?php if (!empty($cvData['polyvalence'])): ?>
-                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
-                        <i class="fas fa-puzzle-piece text-2xl text-primary-600"></i>
-                        <h2 class="text-3xl font-heading font-bold text-gray-800">
-                            <?= Helpers::e($cvData['polyvalence']['title']) ?>
-                        </h2>
-                    </div>
-                    <div
-                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
-                        <?= $cvData['polyvalence']['content'] ?>
-                    </div>
+                <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                    <i class="fas fa-puzzle-piece text-2xl text-primary-600"></i>
+                    <h2 class="text-3xl font-heading font-bold text-gray-800">
+                        <?= Helpers::e($cvData['polyvalence']['title']) ?>
+                    </h2>
+                </div>
+                <div
+                    class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
+                    <?= $cvData['polyvalence']['content'] ?>
+                </div>
                 <?php else: ?>
-                    <p class="text-gray-500">Aucune donnée disponible.</p>
+                <p class="text-gray-500">Aucune donnée disponible.</p>
                 <?php endif; ?>
             </div>
 
             <!-- Soft Skills -->
             <div data-panel="soft_skills" class="hidden tab-panel">
                 <?php if (!empty($cvData['soft_skills'])): ?>
-                    <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
-                        <i class="fas fa-users text-2xl text-primary-600"></i>
-                        <h2 class="text-3xl font-heading font-bold text-gray-800">
-                            <?= Helpers::e($cvData['soft_skills']['title']) ?>
-                        </h2>
-                    </div>
-                    <div
-                        class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
-                        <?= $cvData['soft_skills']['content'] ?>
-                    </div>
+                <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
+                    <i class="fas fa-users text-2xl text-primary-600"></i>
+                    <h2 class="text-3xl font-heading font-bold text-gray-800">
+                        <?= Helpers::e($cvData['soft_skills']['title']) ?>
+                    </h2>
+                </div>
+                <div
+                    class="prose max-w-none prose-headings:text-primary-700 prose-a:text-primary-600 hover:prose-a:text-primary-800">
+                    <?= $cvData['soft_skills']['content'] ?>
+                </div>
                 <?php else: ?>
-                    <p class="text-gray-500">Aucune donnée disponible.</p>
+                <p class="text-gray-500">Aucune donnée disponible.</p>
                 <?php endif; ?>
             </div>
         </div>
@@ -243,22 +250,22 @@ ob_start();
                 <!-- CV PDF -->
                 <div data-panel="cv_pdf" class="hidden">
                     <?php if (!empty($cvData['cv_pdf'])): ?>
-                        <div class="cv-document-content">
-                            <?= $cvData['cv_pdf']['content'] ?>
-                        </div>
+                    <div class="cv-document-content">
+                        <?= $cvData['cv_pdf']['content'] ?>
+                    </div>
                     <?php else: ?>
-                        <p class="text-gray-500">Aucune donnée disponible.</p>
+                    <p class="text-gray-500">Aucune donnée disponible.</p>
                     <?php endif; ?>
                 </div>
 
                 <!-- CV Vidéo -->
                 <div data-panel="cv_video" class="hidden">
                     <?php if (!empty($cvData['cv_video'])): ?>
-                        <div class="cv-document-content video-container">
-                            <?= $cvData['cv_video']['content'] ?>
-                        </div>
+                    <div class="cv-document-content video-container">
+                        <?= $cvData['cv_video']['content'] ?>
+                    </div>
                     <?php else: ?>
-                        <p class="text-gray-500">Aucune donnée disponible.</p>
+                    <p class="text-gray-500">Aucune donnée disponible.</p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -267,24 +274,24 @@ ob_start();
 
     <!-- PDF Section (optionnel) -->
     <?php if (file_exists(__DIR__ . '/../../../public/assets/cv.pdf')): ?>
-        <section class="bg-white rounded-lg shadow-lg p-6 lg:p-8 mt-8 no-print">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-heading font-semibold">CV PDF</h2>
-                <div class="flex gap-2">
-                    <a href="<?= Helpers::asset('cv.pdf') ?>" target="_blank" class="btn btn-outline">
-                        <i class="fas fa-external-link-alt"></i>
-                        Ouvrir
-                    </a>
-                    <a href="<?= Helpers::asset('cv.pdf') ?>" download class="btn btn-primary">
-                        <i class="fas fa-download"></i>
-                        Télécharger
-                    </a>
-                </div>
+    <section class="bg-white rounded-lg shadow-lg p-6 lg:p-8 mt-8 no-print">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-2xl font-heading font-semibold">CV PDF</h2>
+            <div class="flex gap-2">
+                <a href="<?= Helpers::asset('cv.pdf') ?>" target="_blank" class="btn btn-outline">
+                    <i class="fas fa-external-link-alt"></i>
+                    Ouvrir
+                </a>
+                <a href="<?= Helpers::asset('cv.pdf') ?>" download class="btn btn-primary">
+                    <i class="fas fa-download"></i>
+                    Télécharger
+                </a>
             </div>
-            <div class="border rounded-lg overflow-hidden">
-                <iframe src="<?= Helpers::asset('cv.pdf') ?>" class="w-full h-[600px]" title="CV PDF"></iframe>
-            </div>
-        </section>
+        </div>
+        <div class="border rounded-lg overflow-hidden">
+            <iframe src="<?= Helpers::asset('cv.pdf') ?>" class="w-full h-[600px]" title="CV PDF"></iframe>
+        </div>
+    </section>
     <?php endif; ?>
 </div>
 

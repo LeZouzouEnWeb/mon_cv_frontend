@@ -5,7 +5,7 @@
 /* Custom CSS */
 @layer base {
   body {
-    @apply font-sans text-gray-800 bg-gray-50;
+    @apply font-sans text-gray-800 bg-slate-800;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -65,24 +65,24 @@
     @apply text-primary-700 bg-white border-primary-600;
       @apply font-bold shadow-md;
     }
-    
+
     .tab:hover:not(.tab-active) {
       @apply border-primary-300 bg-gradient-to-b from-primary-50 to-transparent;
     }
-    
+
     .tab i {
       @apply text-xl transition-transform;
     }
-    
+
     .tab-active i {
       @apply transform scale-110;
     }
-    
+
     /* Panels des onglets avec animation */
     .tab-panel {
       @apply transition-all duration-300;
     }
-    
+
     .tab-panel:not(.hidden) {
       @apply animate-fade-in;
   }
@@ -165,75 +165,75 @@
   .wp-block-list {
     @apply space-y-3 text-gray-700 ml-0 list-none;
     }
-    
+
     .wp-block-list li {
       @apply pl-6 relative;
     }
-    
+
     .wp-block-list li::before {
       content: "✓";
       @apply absolute left-0 text-primary-600 font-bold;
     }
-    
+
     /* Amélioration de la prose dans les panels */
     .tab-panel .prose {
       @apply text-gray-700 leading-relaxed;
     }
-    
+
     .tab-panel .prose p {
       @apply mb-4 text-base;
     }
-    
+
     .tab-panel .prose p strong {
       @apply text-gray-900 font-bold text-base;
     }
-    
+
     .tab-panel .prose p em {
       @apply text-gray-600 italic;
     }
-    
+
     .tab-panel .prose h2 {
       @apply flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200;
       @apply text-xl font-heading font-bold text-gray-800 mt-8;
     }
-    
+
     .tab-panel .prose h2::before {
       content: "▸";
       @apply text-2xl text-primary-600 font-bold;
     }
-    
+
     .tab-panel .prose h3 {
       @apply text-lg font-heading font-bold text-primary-600 mt-8 mb-2;
       @apply bg-gradient-to-r from-primary-50 to-transparent px-4 py-3 rounded-lg;
       @apply border-l-4 border-primary-600;
     }
-    
+
     .tab-panel .prose h4 {
       @apply text-sm font-heading font-semibold text-gray-700 mt-3 mb-3;
       @apply pl-4 border-l-2 border-gray-300;
     }
-    
+
     .tab-panel .prose p {
       @apply mb-4 text-sm leading-relaxed;
     }
-    
+
     .tab-panel .prose p:has(+ .wp-block-separator) {
       @apply mb-6;
     }
-    
+
     .tab-panel .prose ul {
       @apply space-y-2 ml-0 list-none;
     }
-    
+
     .tab-panel .prose ul li {
       @apply pl-6 relative text-gray-700 leading-relaxed text-sm;
     }
-    
+
     .tab-panel .prose ul li::before {
       content: "▸";
       @apply absolute left-0 text-primary-500 font-bold text-lg;
     }
-    
+
     .tab-panel .prose hr {
       @apply border-0 h-px my-6;
       background: linear-gradient(to right, transparent 10%, rgb(59, 130, 246) 50%, transparent 90%);
