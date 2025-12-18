@@ -19,9 +19,9 @@ ob_start();
         <div class="md:flex">
             <!-- Photo -->
             <div class="flex items-center justify-center p-6 bg-gradient-to-br from-gray-100 to-gray-200">
-                <div class="w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden shadow-xl ring-4 ring-white">
+                <div class="photo-cv rounded-lg overflow-hidden shadow-xl ring-4 ring-white">
                     <img src="https://api-cv.corbisier.fr/wp-content/uploads/2025/12/photo_identite_tr-e1766007892344.png"
-                        alt="Eric Corbisier" class="w-full h-full object-cover object-top" loading="eager">
+                        alt="Eric Corbisier" class="w-full h-full object-contain object-center" loading="eager">
                 </div>
             </div>
 

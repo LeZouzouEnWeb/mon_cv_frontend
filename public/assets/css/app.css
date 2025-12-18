@@ -697,6 +697,20 @@ h3 {
 
 /* Cartes */
 
+/* Photo de profil */
+
+.photo-cv {
+  width: 5rem;
+  height: 8rem;
+}
+
+@media (min-width: 768px) {
+  .photo-cv {
+    width: 6rem;
+    height: 10rem;
+  }
+}
+
 /* Onglets principaux - style harmonisé avec les onglets CV */
 
 .tab {
@@ -1502,10 +1516,6 @@ h3 {
   height: 5rem;
 }
 
-.h-40 {
-  height: 10rem;
-}
-
 .h-\[600px\] {
   height: 600px;
 }
@@ -1520,10 +1530,6 @@ h3 {
 
 .w-12 {
   width: 3rem;
-}
-
-.w-40 {
-  width: 10rem;
 }
 
 .w-auto {
@@ -1850,14 +1856,9 @@ h3 {
      object-fit: contain;
 }
 
-.object-cover {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.object-top {
-  -o-object-position: top;
-     object-position: top;
+.object-center {
+  -o-object-position: center;
+     object-position: center;
 }
 
 .p-6 {
@@ -2549,14 +2550,6 @@ h3 {
 
   .md\:hidden {
     display: none;
-  }
-
-  .md\:h-48 {
-    height: 12rem;
-  }
-
-  .md\:w-48 {
-    width: 12rem;
   }
 
   .md\:grid-cols-3 {

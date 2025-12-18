@@ -52,6 +52,18 @@
     @apply transition-shadow duration-300 hover:shadow-xl;
   }
 
+    /* Photo de profil */
+    .photo-cv {
+      width: 5rem;
+      height: 8rem;
+    }
+  
+    @media (min-width: 768px) {
+      .photo-cv {
+        width: 6rem;
+        height: 10rem;
+      }
+    }
                                                                                                                                                                                                                                                                 /* Onglets principaux - style harmonisé avec les onglets CV */
   .tab {
     @apply flex items-center gap-2 px-6 py-4 font-medium transition-all duration-300;
