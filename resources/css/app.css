@@ -57,7 +57,7 @@
       width: 5rem;
       height: 8rem;
     }
-  
+
     @media (min-width: 768px) {
       .photo-cv {
         width: 6rem;
@@ -124,6 +124,26 @@
   .loader {
     @apply inline-block w-8 h-8 border-4 border-gray-200 border-t-primary-600 rounded-full animate-spin;
   }
+/* Menu mobile avec animation fluide */
+#mobile-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 400ms ease-in-out, opacity 400ms ease-in-out, padding 400ms ease-in-out;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#mobile-menu>div {
+  overflow: hidden;
+}
+
+#mobile-menu:not(.hidden) {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 /* Modal */
 .modal {
   @apply transition-opacity duration-300;
