@@ -56,19 +56,19 @@ ob_start();
 
                     <div>
                         <h3 class="font-semibold text-sm text-gray-500 mb-2">Sites Web</h3>
-                        <div class="flex flex-wrap gap-3">
+                        <div class="flex flex-wrap gap-2">
                             <a href="https://github.com/LeZouzouEnWeb" target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-primary-50 rounded-lg text-gray-700 hover:text-primary-600 transition-colors">
+                                class="inline-flex items-center gap-2 text-gray-700 hover:text-primary-600 transition-colors">
                                 <i class="fab fa-github text-primary-600"></i>
                                 <span class="text-sm">GitHub</span>
                             </a>
                             <a href="https://corbisier.fr" target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-primary-50 rounded-lg text-gray-700 hover:text-primary-600 transition-colors">
+                                class="inline-flex items-center gap-2 text-gray-700 hover:text-primary-600 transition-colors">
                                 <i class="fas fa-globe text-primary-600"></i>
                                 <span class="text-sm">corbisier.fr</span>
                             </a>
                             <a href="https://lescorbycats.fr" target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-primary-50 rounded-lg text-gray-700 hover:text-primary-600 transition-colors">
+                                class="inline-flex items-center gap-2 text-gray-700 hover:text-primary-600 transition-colors">
                                 <i class="fas fa-globe text-primary-600"></i>
                                 <span class="text-sm">lescorbycats.fr</span>
                             </a>
