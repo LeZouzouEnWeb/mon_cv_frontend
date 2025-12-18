@@ -13,25 +13,35 @@
           e.preventDefault();
           const targetId = tab.dataset.tab;
           this.activateTab(targetId);
-          const url = new URL(window.location);
-          url.searchParams.set("tab", targetId);
-          window.history.pushState({}, "", url);
+          if (!this.container.dataset.tabsContainer) {
+            const url = new URL(window.location);
+            url.searchParams.set("tab", targetId);
+            window.history.pushState({}, "", url);
+          }
         });
       });
-      const urlParams = new URLSearchParams(window.location.search);
-      const activeTab = urlParams.get("tab");
-      if (activeTab) {
-        this.activateTab(activeTab);
-      } else if (this.tabs.length > 0) {
-        this.activateTab(this.tabs[0].dataset.tab);
-      }
-      window.addEventListener("popstate", () => {
-        const urlParams2 = new URLSearchParams(window.location.search);
-        const activeTab2 = urlParams2.get("tab");
-        if (activeTab2) {
-          this.activateTab(activeTab2);
+      if (!this.container.dataset.tabsContainer) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get("tab");
+        if (activeTab && this.panels.find((p) => p.dataset.panel === activeTab)) {
+          this.activateTab(activeTab);
+        } else if (this.tabs.length > 0) {
+          this.activateTab(this.tabs[0].dataset.tab);
         }
-      });
+      } else {
+        if (this.tabs.length > 0) {
+          this.activateTab(this.tabs[0].dataset.tab);
+        }
+      }
+      if (!this.container.dataset.tabsContainer) {
+        window.addEventListener("popstate", () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const activeTab = urlParams.get("tab");
+          if (activeTab) {
+            this.activateTab(activeTab);
+          }
+        });
+      }
     }
     activateTab(tabId) {
       this.tabs.forEach((t) => t.classList.remove("tab-active"));

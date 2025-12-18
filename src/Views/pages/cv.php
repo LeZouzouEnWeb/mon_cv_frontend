@@ -129,7 +129,7 @@ ob_start();
         <!-- Tab Panels -->
         <div class="p-6 lg:p-8 bg-white">
             <!-- Experience -->
-            <div data-panel="experience" class="hidden tab-panel">
+            <div data-panel="experience" class="tab-panel">
                 <?php if (!empty($cvData['experience'])): ?>
                     <div class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200">
                         <i class="fas fa-briefcase text-xl text-primary-600"></i>
@@ -251,7 +251,7 @@ ob_start();
             <!-- Tab Panels -->
             <div class="p-6 lg:p-8">
                 <!-- CV PDF -->
-                <div data-panel="cv_pdf" class="hidden">
+                <div data-panel="cv_pdf">
                     <?php if (!empty($cvData['cv_pdf'])): ?>
                         <div class="cv-document-content">
                             <?= $cvData['cv_pdf']['content'] ?>
