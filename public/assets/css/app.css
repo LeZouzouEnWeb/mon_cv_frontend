@@ -975,8 +975,8 @@ h3 {
 .tab-panel .prose h2 {
   margin-top: 2rem;
   font-family: Poppins, sans-serif;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity, 1));
@@ -984,8 +984,8 @@ h3 {
 
 .tab-panel .prose h2::before {
   content: "▸";
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(2 132 199 / var(--tw-text-opacity, 1));
@@ -2426,6 +2426,10 @@ h3 {
 }
 
 @media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex;
+  }
+
   .lg\:p-8 {
     padding: 2rem;
   }

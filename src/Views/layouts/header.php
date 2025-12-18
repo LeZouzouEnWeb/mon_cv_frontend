@@ -9,18 +9,18 @@ use App\Utils\Helpers;
             <div class="flex items-center py-2">
                 <a href="/" class="flex items-center">
                     <img src="https://api-cv.corbisier.fr/wp-content/uploads/2025/12/logo_corbidev_large-e1766005728496.png"
-                        alt="CorbiDev Logo"
-                        class="h-16 w-auto max-w-[200px] object-contain">
+                        alt="CorbiDev Logo" class="h-16 w-auto max-w-[200px] object-contain">
                 </a>
             </div>
 
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="#cv" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">CV</a>
-                <button id="contact-modal-btn" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">
+                <button id="contact-modal-btn"
+                    class="text-gray-700 hover:text-primary-600 transition-colors font-medium">
                     Contact
                 </button>
-                <button id="print-btn" class="btn btn-primary shadow-md">
+                <button id="print-btn" class="btn btn-primary shadow-md hidden lg:flex">
                     <i class="fas fa-print"></i>
                     Imprimer
                 </button>
@@ -36,12 +36,9 @@ use App\Utils\Helpers;
         <nav id="mobile-menu" class="md:hidden hidden pb-4">
             <div class="flex flex-col space-y-3">
                 <a href="#cv" class="text-gray-600 hover:text-primary-600 transition-colors">CV</a>
-                <button id="contact-modal-btn-mobile" class="text-left text-gray-600 hover:text-primary-600 transition-colors">
+                <button id="contact-modal-btn-mobile"
+                    class="text-left text-gray-600 hover:text-primary-600 transition-colors">
                     Contact
-                </button>
-                <button id="print-btn-mobile" class="btn btn-outline">
-                    <i class="fas fa-print"></i>
-                    Imprimer
                 </button>
             </div>
         </nav>

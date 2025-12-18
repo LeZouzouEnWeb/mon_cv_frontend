@@ -222,12 +222,12 @@
 
     .tab-panel .prose h2 {
       @apply flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200;
-      @apply text-xl font-heading font-bold text-gray-800 mt-8;
+      @apply text-base font-heading font-bold text-gray-800 mt-8;
     }
 
     .tab-panel .prose h2::before {
       content: "▸";
-      @apply text-2xl text-primary-600 font-bold;
+      @apply text-lg text-primary-600 font-bold;
     }
 
     .tab-panel .prose h3 {
