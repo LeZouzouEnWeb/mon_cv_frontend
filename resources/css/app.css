@@ -52,6 +52,18 @@
     @apply transition-shadow duration-300 hover:shadow-xl;
   }
 
+    /* Photo de profil */
+    .photo-cv {
+      width: 5rem;
+      height: 8rem;
+    }
+
+    @media (min-width: 768px) {
+      .photo-cv {
+        width: 6rem;
+        height: 10rem;
+      }
+    }
                                                                                                                                                                                                                                                                 /* Onglets principaux - style harmonisé avec les onglets CV */
   .tab {
     @apply flex items-center gap-2 px-6 py-4 font-medium transition-all duration-300;
@@ -87,6 +99,14 @@
       @apply animate-fade-in;
   }
 
+    /* Indicateurs d'onglets (mobile/tablette) */
+    .tab-indicator {
+      @apply w-2 h-2 rounded-full bg-gray-300 transition-all duration-300;
+    }
+
+    .tab-indicator.active {
+      @apply w-8 bg-primary-600;
+    }
   /* Badge */
   .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
@@ -104,6 +124,26 @@
   .loader {
     @apply inline-block w-8 h-8 border-4 border-gray-200 border-t-primary-600 rounded-full animate-spin;
   }
+/* Menu mobile avec animation fluide */
+#mobile-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 400ms ease-in-out, opacity 400ms ease-in-out, padding 400ms ease-in-out;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#mobile-menu>div {
+  overflow: hidden;
+}
+
+#mobile-menu:not(.hidden) {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 /* Modal */
 .modal {
   @apply transition-opacity duration-300;
@@ -222,12 +262,12 @@
 
     .tab-panel .prose h2 {
       @apply flex items-center gap-3 mb-6 pb-3 border-b-2 border-primary-200;
-      @apply text-xl font-heading font-bold text-gray-800 mt-8;
+      @apply text-base font-heading font-bold text-gray-800 mt-8;
     }
 
     .tab-panel .prose h2::before {
       content: "▸";
-      @apply text-2xl text-primary-600 font-bold;
+      @apply text-lg text-primary-600 font-bold;
     }
 
     .tab-panel .prose h3 {
@@ -293,6 +333,12 @@
   width: 100%;
   min-height: 500px;
 }
+/* Masquer iframe PDF sur mobile et tablette */
+@media (max-width: 1023px) {
+  .cv-document-content iframe.object {
+    @apply hidden;
+  }
+}
   /* Vidéos */
   .wp-block-video {
     @apply my-6 rounded-lg overflow-hidden shadow-lg;
@@ -342,14 +388,36 @@
 
     /* Amélioration du contraste pour les fichiers PDF */
     .cv-document-content .wp-block-file {
-      @apply bg-gradient-to-br from-gray-50 to-blue-50;
-      @apply border-2 border-blue-200 shadow-md;
+      @apply flex flex-row items-center justify-start gap-3;
+      @apply rounded-lg border-2 border-blue-200 shadow-md;
+      @apply p-2 mx-2 mt-2 mb-0;
+      @apply transition-all duration-300;
+    }
+
+      .cv-document-content .wp-block-file a:not(.wp-block-file__button) {
+        @apply text-base font-semibold text-blue-700 hover:text-blue-800;
+        @apply flex items-center gap-2;
+        @apply transition-colors duration-200;
+      }
+
+      .cv-document-content .wp-block-file a:not(.wp-block-file__button)::before {
+        content: "📄";
+        @apply text-lg;
     }
 
     .cv-document-content .wp-block-file__button {
       @apply bg-blue-600 hover:bg-blue-700 text-white;
       @apply shadow-lg hover:shadow-xl;
-  }
+      @apply px-4 py-2 rounded-full font-semibold text-sm;
+        @apply transform hover:scale-105 transition-all duration-200;
+        @apply flex items-center gap-2;
+        @apply mt-0;
+      }
+
+      .cv-document-content .wp-block-file__button::before {
+        content: "⬇";
+        @apply text-base;
+      }
 
   /* Paragraphes avec alignement */
   .has-text-align-center {

@@ -13,25 +13,35 @@
           e.preventDefault();
           const targetId = tab.dataset.tab;
           this.activateTab(targetId);
-          const url = new URL(window.location);
-          url.searchParams.set("tab", targetId);
-          window.history.pushState({}, "", url);
+          if (!this.container.dataset.tabsContainer) {
+            const url = new URL(window.location);
+            url.searchParams.set("tab", targetId);
+            window.history.pushState({}, "", url);
+          }
         });
       });
-      const urlParams = new URLSearchParams(window.location.search);
-      const activeTab = urlParams.get("tab");
-      if (activeTab) {
-        this.activateTab(activeTab);
-      } else if (this.tabs.length > 0) {
-        this.activateTab(this.tabs[0].dataset.tab);
-      }
-      window.addEventListener("popstate", () => {
-        const urlParams2 = new URLSearchParams(window.location.search);
-        const activeTab2 = urlParams2.get("tab");
-        if (activeTab2) {
-          this.activateTab(activeTab2);
+      if (!this.container.dataset.tabsContainer) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get("tab");
+        if (activeTab && this.panels.find((p) => p.dataset.panel === activeTab)) {
+          this.activateTab(activeTab);
+        } else if (this.tabs.length > 0) {
+          this.activateTab(this.tabs[0].dataset.tab);
         }
-      });
+      } else {
+        if (this.tabs.length > 0) {
+          this.activateTab(this.tabs[0].dataset.tab);
+        }
+      }
+      if (!this.container.dataset.tabsContainer) {
+        window.addEventListener("popstate", () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const activeTab = urlParams.get("tab");
+          if (activeTab) {
+            this.activateTab(activeTab);
+          }
+        });
+      }
     }
     activateTab(tabId) {
       this.tabs.forEach((t) => t.classList.remove("tab-active"));
@@ -39,12 +49,18 @@
         p.classList.add("hidden");
         p.classList.remove("animate-fade-in");
       });
+      const indicators = this.container.querySelectorAll("[data-indicator]");
+      indicators.forEach((i) => i.classList.remove("active"));
       const targetTab = Array.from(this.tabs).find((t) => t.dataset.tab === tabId);
       const targetPanel = Array.from(this.panels).find((p) => p.dataset.panel === tabId);
+      const targetIndicator = Array.from(indicators).find((i) => i.dataset.indicator === tabId);
       if (targetTab && targetPanel) {
         targetTab.classList.add("tab-active");
         targetPanel.classList.remove("hidden");
         targetPanel.classList.add("animate-fade-in");
+        if (targetIndicator) {
+          targetIndicator.classList.add("active");
+        }
       }
     }
   };

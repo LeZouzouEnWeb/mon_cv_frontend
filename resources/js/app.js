@@ -18,30 +18,41 @@ class TabsManager {
         const targetId = tab.dataset.tab;
         this.activateTab(targetId);
 
-        // Update URL
-        const url = new URL(window.location);
-        url.searchParams.set('tab', targetId);
-        window.history.pushState({}, '', url);
+        // Update URL only for main tabs container (not CV documents)
+        if (!this.container.dataset.tabsContainer) {
+          const url = new URL(window.location);
+          url.searchParams.set('tab', targetId);
+          window.history.pushState({}, '', url);
+        }
       });
     });
 
-    // Activate tab from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const activeTab = urlParams.get('tab');
-    if (activeTab) {
-      this.activateTab(activeTab);
-    } else if (this.tabs.length > 0) {
-      this.activateTab(this.tabs[0].dataset.tab);
-    }
-
-    // Handle browser back/forward
-    window.addEventListener('popstate', () => {
+    // Activate tab from URL (only for main tabs container)
+    if (!this.container.dataset.tabsContainer) {
       const urlParams = new URLSearchParams(window.location.search);
       const activeTab = urlParams.get('tab');
-      if (activeTab) {
+      if (activeTab && this.panels.find(p => p.dataset.panel === activeTab)) {
         this.activateTab(activeTab);
+      } else if (this.tabs.length > 0) {
+        this.activateTab(this.tabs[0].dataset.tab);
       }
-    });
+    } else {
+      // For secondary tabs containers, always activate first tab
+      if (this.tabs.length > 0) {
+        this.activateTab(this.tabs[0].dataset.tab);
+      }
+    }
+
+    // Handle browser back/forward (only for main tabs container)
+    if (!this.container.dataset.tabsContainer) {
+      window.addEventListener('popstate', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get('tab');
+        if (activeTab) {
+          this.activateTab(activeTab);
+        }
+      });
+    }
   }
 
   activateTab(tabId) {
@@ -52,14 +63,24 @@ class TabsManager {
       p.classList.remove('animate-fade-in');
     });
 
+    // Deactivate all indicators
+    const indicators = this.container.querySelectorAll('[data-indicator]');
+    indicators.forEach(i => i.classList.remove('active'));
+
     // Activate target tab and panel
     const targetTab = Array.from(this.tabs).find(t => t.dataset.tab === tabId);
     const targetPanel = Array.from(this.panels).find(p => p.dataset.panel === tabId);
+    const targetIndicator = Array.from(indicators).find(i => i.dataset.indicator === tabId);
 
     if (targetTab && targetPanel) {
       targetTab.classList.add('tab-active');
       targetPanel.classList.remove('hidden');
       targetPanel.classList.add('animate-fade-in');
+
+      // Activate indicator
+      if (targetIndicator) {
+        targetIndicator.classList.add('active');
+      }
     }
   }
 }
