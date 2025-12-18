@@ -52,14 +52,24 @@ class TabsManager {
       p.classList.remove('animate-fade-in');
     });
 
+    // Deactivate all indicators
+    const indicators = this.container.querySelectorAll('[data-indicator]');
+    indicators.forEach(i => i.classList.remove('active'));
+
     // Activate target tab and panel
     const targetTab = Array.from(this.tabs).find(t => t.dataset.tab === tabId);
     const targetPanel = Array.from(this.panels).find(p => p.dataset.panel === tabId);
+    const targetIndicator = Array.from(indicators).find(i => i.dataset.indicator === tabId);
 
     if (targetTab && targetPanel) {
       targetTab.classList.add('tab-active');
       targetPanel.classList.remove('hidden');
       targetPanel.classList.add('animate-fade-in');
+
+      // Activate indicator
+      if (targetIndicator) {
+        targetIndicator.classList.add('active');
+      }
     }
   }
 }

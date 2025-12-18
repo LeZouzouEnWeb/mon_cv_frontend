@@ -87,6 +87,14 @@
       @apply animate-fade-in;
   }
 
+    /* Indicateurs d'onglets (mobile/tablette) */
+    .tab-indicator {
+      @apply w-2 h-2 rounded-full bg-gray-300 transition-all duration-300;
+    }
+  
+    .tab-indicator.active {
+      @apply w-8 bg-primary-600;
+    }
   /* Badge */
   .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;

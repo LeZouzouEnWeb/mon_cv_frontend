@@ -19,9 +19,9 @@ ob_start();
         <div class="md:flex">
             <!-- Photo -->
             <div class="flex items-center justify-center p-6 bg-gradient-to-br from-gray-100 to-gray-200">
-                <div class="w-32 h-40 md:w-40 md:h-48 rounded-lg overflow-hidden shadow-xl ring-4 ring-white relative">
+                <div class="w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden shadow-xl ring-4 ring-white">
                     <img src="https://api-cv.corbisier.fr/wp-content/uploads/2025/12/photo_identite_tr-e1766007892344.png"
-                        alt="Eric Corbisier" class="w-full h-full object-cover object-center" loading="eager">
+                        alt="Eric Corbisier" class="w-full h-full object-cover object-top" loading="eager">
                 </div>
             </div>
 
@@ -37,7 +37,7 @@ ob_start();
                 <?php endif; ?>
 
                 <!-- Contact & Liens -->
-                <div class="grid sm:grid-cols-2 gap-4">
+                <div class="space-y-4">
                     <div>
                         <h3 class="font-semibold text-sm text-gray-500 mb-2">Contact</h3>
                         <ul class="space-y-2">
@@ -56,29 +56,23 @@ ob_start();
 
                     <div>
                         <h3 class="font-semibold text-sm text-gray-500 mb-2">Sites Web</h3>
-                        <ul class="space-y-2">
-                            <li class="flex items-center gap-2">
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://github.com/LeZouzouEnWeb" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-primary-50 rounded-lg text-gray-700 hover:text-primary-600 transition-colors">
                                 <i class="fab fa-github text-primary-600"></i>
-                                <a href="https://github.com/LeZouzouEnWeb" target="_blank" rel="noopener noreferrer"
-                                    class="text-gray-700 hover:text-primary-600">
-                                    GitHub
-                                </a>
-                            </li>
-                            <li class="flex items-center gap-2">
+                                <span class="text-sm">GitHub</span>
+                            </a>
+                            <a href="https://corbisier.fr" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-primary-50 rounded-lg text-gray-700 hover:text-primary-600 transition-colors">
                                 <i class="fas fa-globe text-primary-600"></i>
-                                <a href="https://corbisier.fr" target="_blank" rel="noopener noreferrer"
-                                    class="text-gray-700 hover:text-primary-600">
-                                    corbisier.fr
-                                </a>
-                            </li>
-                            <li class="flex items-center gap-2">
+                                <span class="text-sm">corbisier.fr</span>
+                            </a>
+                            <a href="https://lescorbycats.fr" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-primary-50 rounded-lg text-gray-700 hover:text-primary-600 transition-colors">
                                 <i class="fas fa-globe text-primary-600"></i>
-                                <a href="https://lescorbycats.fr" target="_blank" rel="noopener noreferrer"
-                                    class="text-gray-700 hover:text-primary-600">
-                                    lescorbycats.fr
-                                </a>
-                            </li>
-                        </ul>
+                                <span class="text-sm">lescorbycats.fr</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,6 +115,15 @@ ob_start();
                     Soft Skills
                 </button>
             </nav>
+        </div>
+
+        <!-- Indicateurs de position (mobile/tablette uniquement) -->
+        <div class="tab-indicators lg:hidden flex justify-center gap-2 py-3 bg-white border-b border-gray-200">
+            <span data-indicator="experience" class="tab-indicator active"></span>
+            <span data-indicator="formations" class="tab-indicator"></span>
+            <span data-indicator="expertise" class="tab-indicator"></span>
+            <span data-indicator="polyvalence" class="tab-indicator"></span>
+            <span data-indicator="soft_skills" class="tab-indicator"></span>
         </div>
 
         <!-- Tab Panels -->
